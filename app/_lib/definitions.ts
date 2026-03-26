@@ -1,9 +1,6 @@
-export type Blog = {
-	id: string;
-	title: string;
-	category: string[];
-	description: string;
-	date: string;
-	coverImage: string;
-	content: string;
-};
+import { InferSelectModel } from "drizzle-orm";
+import { blogsTable, blogImages } from "@/src/db/schema";
+
+export type Blog = InferSelectModel<typeof blogsTable>;
+
+export type BlogImage = InferSelectModel<typeof blogImages>;

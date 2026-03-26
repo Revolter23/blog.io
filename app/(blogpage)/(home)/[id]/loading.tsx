@@ -1,7 +1,7 @@
 export default function Loading() {
 	return (
 		<div className="grow overflow-auto p-8">
-			<article className="bg-white rounded-lg overflow-hidden">
+			<article className="bg-white rounded-lg overflow-hidden h-200">
 				{/* hero image skeleton */}
 				<div className="w-full h-96 bg-gray-300" />
 

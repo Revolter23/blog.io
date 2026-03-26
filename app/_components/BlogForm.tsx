@@ -3,6 +3,7 @@
 import { useActionState, useRef, useState } from "react";
 import { submitBlogAction, BlogFormState } from "@/app/_lib/action";
 import Image from "next/image";
+import { on } from "events";
 
 // ---------------------------------------------------------------------------
 // Main component
@@ -13,9 +14,7 @@ export default function BlogForm() {
 		{},
 	);
 
-	const [coverImage, setCoverImage] = useState(
-		state.values?.coverImage ?? "",
-	);
+	const [previewUrl, setPreviewUrl] = useState("");
 
 	// // ---- Success state -------------------------------------------------------
 	// if (state.success) {
@@ -78,8 +77,10 @@ export default function BlogForm() {
 								Cover Image
 							</Label>
 							<CoverImageUpload
-								value={coverImage}
-								onChange={setCoverImage}
+								previewUrl={previewUrl}
+								onChange={(_file, blobUrl) =>
+									setPreviewUrl(blobUrl)
+								}
 								error={state.errors?.coverImage}
 							/>
 						</div>
@@ -141,7 +142,7 @@ export default function BlogForm() {
 						<div className="flex justify-end gap-3">
 							<button
 								type="reset"
-								onClick={() => setCoverImage("")}
+								onClick={() => setPreviewUrl("")}
 								className="px-5 py-2.5 border border-slate-200 rounded-lg bg-white text-slate-500 font-medium text-[0.9375rem] cursor-pointer hover:bg-slate-50 transition-colors duration-150"
 							>
 								Reset
@@ -271,12 +272,12 @@ function Textarea({
 // Cover image upload widget
 // ---------------------------------------------------------------------------
 function CoverImageUpload({
-	value,
+	previewUrl,
 	onChange,
 	error,
 }: {
-	value: string;
-	onChange: (url: string) => void;
+	previewUrl: string;
+	onChange: (file: File, blobUrl: string) => void;
 	error?: string[];
 }) {
 	const fileRef = useRef<HTMLInputElement>(null);
@@ -284,7 +285,9 @@ function CoverImageUpload({
 
 	const handleFile = (file: File) => {
 		if (!file.type.startsWith("image/")) return;
-		onChange(URL.createObjectURL(file));
+		// Blob URL is only for the <img> preview — the original File is passed separately
+		const blobUrl = URL.createObjectURL(file);
+		onChange(file, blobUrl);
 	};
 
 	const zoneClasses = [
@@ -302,6 +305,7 @@ function CoverImageUpload({
 			<input
 				ref={fileRef}
 				type="file"
+				name="coverImage"
 				accept="image/*"
 				className="hidden"
 				onChange={(e) => {
@@ -309,7 +313,6 @@ function CoverImageUpload({
 					if (f) handleFile(f);
 				}}
 			/>
-			<input type="hidden" name="coverImage" value={value} />
 
 			<div
 				className={zoneClasses}
@@ -323,13 +326,19 @@ function CoverImageUpload({
 					e.preventDefault();
 					setDragging(false);
 					const f = e.dataTransfer.files?.[0];
-					if (f) handleFile(f);
+					if (f) {
+						// Sync the hidden file input so FormData picks up the dropped file too
+						const dt = new DataTransfer();
+						dt.items.add(f);
+						if (fileRef.current) fileRef.current.files = dt.files;
+						handleFile(f);
+					}
 				}}
 			>
-				{value ? (
+				{previewUrl ? (
 					<>
 						<Image
-							src={value}
+							src={previewUrl}
 							alt="Cover preview"
 							width={1920}
 							height={1080}

@@ -98,15 +98,6 @@
 			"content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nunc augue, facilisis nec bibendum quis, volutpat et augue. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum accumsan risus at neque convallis venenatis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris gravida tincidunt diam. Vestibulum ut risus sed nisi auctor efficitur quis quis ligula. Ut mollis sollicitudin libero. Sed pharetra erat vitae nunc fermentum congue. Nunc sagittis velit sit amet dui molestie, eu dictum orci ultricies. Integer dolor dolor, rhoncus a diam in, faucibus pellentesque mauris. Integer ut metus semper, mollis arcu nec, condimentum velit. Donec a nibh tempus, varius neque a, lobortis odio. Sed maximus pellentesque mauris, in tincidunt arcu malesuada sed. Maecenas ac metus nibh. Duis ultrices laoreet magna, et bibendum ante blandit imperdiet.",
 			"category": ["TECH", "NEWS"],
 			"date": "2026-01-29T13:39:55.611Z"
-		},
-		{
-			"id": "12",
-			"title": "New Note",
-			"description": "New Note from form",
-			"content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu lacus hendrerit lectus interdum congue. Donec eget semper dolor, nec dapibus risus. Cras eleifend feugiat lacus quis facilisis. Ut at turpis sagittis, tempor eros at, ultricies enim. Nullam a lectus vel arcu luctus consectetur sed sed lacus. Aenean sollicitudin tempus tellus congue fringilla. Proin sit amet lacus et quam pharetra dictum. Nullam aliquam imperdiet ex, sed sagittis nunc.",
-			"category": ["TECH", "NEWS"],
-			"coverImage": "blob:http://localhost:3000/7124c7e4-8080-4f52-ba54-627e5ae6acba",
-			"date": "2026-03-07T11:27:22.884Z"
 		}
 	]
 }

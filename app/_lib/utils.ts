@@ -1,9 +1,8 @@
 import axios from "axios";
 
-export function getTimeAgo(dateString: string): string {
+export function getTimeAgo(publishedAt: Date): string {
 	const now = new Date();
-	const publishedDate = new Date(dateString);
-	const diffMs = now.getTime() - publishedDate.getTime();
+	const diffMs = now.getTime() - publishedAt.getTime();
 	const diffSecs = Math.floor(diffMs / 1000);
 	const diffMins = Math.floor(diffSecs / 60);
 	const diffHours = Math.floor(diffMins / 60);

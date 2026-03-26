@@ -1,30 +1,36 @@
-import singleBlog from "@/app/_lib/singleBlog";
-import type { Blog } from "@/app/_lib/definitions";
+import type { Blog, BlogImage } from "@/app/_lib/definitions";
 import Image from "next/image";
-import { Suspense } from "react";
+import db from "@/src/index";
+import { blogsTable, blogImages } from "@/src/db/schema";
+import { eq } from "drizzle-orm";
 
 export default async function BlogPage({ id }: { id: string }) {
 	// console.log(id);
-	const data = await singleBlog(id!);
+	const data = await db
+		.select()
+		.from(blogsTable)
+		.innerJoin(blogImages, eq(blogsTable.coverImage, blogImages.imageId))
+		.where(eq(blogsTable.blogId, id));
 
-	// console.log("BlogPage data:", data);
-	const blog: Blog = data;
+	// console.log(data);
+	const blog: Blog = data[0].blogs;
+	const image: BlogImage = data[0].blog_images;
 
 	return (
 		<div className="grow overflow-auto p-8">
-			<article className="bg-white rounded-lg overflow-hidden">
+			<article className="bg-white rounded-lg overflow-hidden min-h-200">
 				{/* Hero Image */}
 				<Image
-					src={blog.coverImage}
+					src={image.imageUrl}
 					alt={blog.title}
 					width={1920}
 					height={1080}
-					className="w-full h-96 object-cover"
+					className="w-full bg-gray-200 h-96 object-cover"
 				/>
 
 				<div className="p-6">
 					<span className="text-violet-700 text-[0.85rem] font-medium">
-						{blog.category[0]}
+						{blog.categories[0]}
 					</span>
 
 					{/* Title */}

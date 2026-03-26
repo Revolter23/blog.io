@@ -18,8 +18,8 @@ export default function Navbar() {
 				<a href="#">Tools</a>
 				<a href="#">Practice</a>
 				<a href="#">Events</a>
-				<a href="#">Job Board</a>
-				<a href="#">Points</a>
+				<a href="#">All Blogs</a>
+				<a href="#">About</a>
 			</div>
 			<Link href="/new-blog">
 				<Button

@@ -3,7 +3,11 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
 	/* config options here */
 	images: {
-		remotePatterns: [new URL("https://images.pexels.com/**")],
+		remotePatterns: [
+			new URL(
+				`https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/**`,
+			),
+		],
 	},
 };
 
