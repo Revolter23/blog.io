@@ -40,7 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/api
-/src/db
+/app/api
 /src/seed.ts
 db.json
