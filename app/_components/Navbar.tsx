@@ -15,11 +15,11 @@ export default function Navbar() {
 				</div>
 			</Link>
 			<div className="flex gap-8 text-gray-600 font-medium">
-				<a href="#">Tools</a>
-				<a href="#">Practice</a>
-				<a href="#">Events</a>
-				<a href="#">All Blogs</a>
-				<a href="#">About</a>
+				<Link href="#">Tools</Link>
+				<Link href="#">Practice</Link>
+				<Link href="#">Events</Link>
+				<Link href="/blogs">All Blogs</Link>
+				<Link href="#">About</Link>
 			</div>
 			<Link href="/new-blog">
 				<Button

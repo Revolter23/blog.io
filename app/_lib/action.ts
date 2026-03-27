@@ -6,7 +6,7 @@ import db from "@/src/index";
 import { z } from "zod";
 import { s3 } from "@/app/_lib/s3";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { blogImages, blogsTable } from "@/src/db/schema";
+import { blogsTable, blogImages } from "@/src/db/schema";
 
 const BlogSchema = z.object({
 	title: z
